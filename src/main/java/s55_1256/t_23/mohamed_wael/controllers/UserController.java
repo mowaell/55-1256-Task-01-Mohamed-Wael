@@ -3,7 +3,9 @@ package s55_1256.t_23.mohamed_wael.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import s55_1256.t_23.mohamed_wael.models.Note;
 import s55_1256.t_23.mohamed_wael.models.User;
+import s55_1256.t_23.mohamed_wael.services.NoteService;
 import s55_1256.t_23.mohamed_wael.services.UserService;
 
 import java.util.List;
@@ -13,9 +15,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final NoteService noteService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, NoteService noteService) {
         this.userService = userService;
+        this.noteService = noteService;
     }
 
     @GetMapping
@@ -55,5 +59,9 @@ public class UserController {
     public void deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
     }
-}
 
+    @GetMapping("/{id}/notes")
+    public List<Note> getNotesByUserId(@PathVariable String id) {
+        return noteService.getNotesByUserId(id);
+    }
+}
