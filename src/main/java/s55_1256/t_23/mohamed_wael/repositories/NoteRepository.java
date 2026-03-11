@@ -50,6 +50,12 @@ public class NoteRepository {
                 .collect(Collectors.toList());
     }
 
+    public Optional<Note> findByTitle(String title) {
+        return notes.stream()
+                .filter(n -> n.getTitle().toLowerCase().contains(title.toLowerCase()))
+                .findFirst();
+    }
+
     public Note save(Note note) {
         notes.add(note);
         new ObjectMapper().writeValue(jsonFile, notes);

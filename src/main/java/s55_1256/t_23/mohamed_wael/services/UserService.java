@@ -29,6 +29,14 @@ public class UserService {
         return user;
     }
 
+    public User getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElse(null);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+        return user;
+    }
+
     public User createUser(User user) {
         return userRepository.save(user);
     }

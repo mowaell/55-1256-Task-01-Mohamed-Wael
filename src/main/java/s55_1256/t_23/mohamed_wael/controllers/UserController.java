@@ -2,7 +2,6 @@ package s55_1256.t_23.mohamed_wael.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import s55_1256.t_23.mohamed_wael.models.Note;
 import s55_1256.t_23.mohamed_wael.models.User;
 import s55_1256.t_23.mohamed_wael.services.NoteService;
@@ -29,14 +28,7 @@ public class UserController {
 
     @GetMapping("/search")
     public User searchByUsername(@RequestParam String username) {
-        User user = userService.getAllUsers().stream()
-                .filter(u -> u.getUsername().equalsIgnoreCase(username))
-                .findFirst()
-                .orElse(null);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
-        }
-        return user;
+        return userService.getUserByUsername(username);
     }
 
     @GetMapping("/{id}")
@@ -55,7 +47,6 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
     }

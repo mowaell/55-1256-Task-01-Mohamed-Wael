@@ -7,4 +7,4 @@ services:
     environment:
       - USER_NAME=Compose_Mohamed_Wael
       - ID=Compose_55_1256
-
+    network_mode: bridge

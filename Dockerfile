@@ -12,4 +12,5 @@ ENV ID=Docker_55_1256
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "-Dserver.port=8080", "app.jar"]
+#ENTRYPOINT ["java", "-jar", "target/app.jar"]
+ENTRYPOINT ["java", "-Dserver.port=8080", "-jar", "app.jar"]
